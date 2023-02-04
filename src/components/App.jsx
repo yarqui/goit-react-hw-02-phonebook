@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Form from './Form';
+import ContactForm from './ContactForm';
 
 export default class App extends Component {
   state = {
@@ -8,11 +8,11 @@ export default class App extends Component {
   };
 
   render() {
-    // const { contacts, name } = this.state;
+    const { contacts, name } = this.state;
     return (
       <>
-        <Form state={this.state}></Form>
-        <ContactList></ContactList>
+        <ContactForm contacts={contacts} nameState={name}></ContactForm>
+        {/* <ContactList></ContactList> */}
       </>
     );
   }

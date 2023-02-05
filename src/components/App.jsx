@@ -4,6 +4,7 @@ import ContactList from './ContactList';
 import Section from './Section';
 import Filter from './Filter';
 import { nanoid } from 'nanoid';
+import { List } from './ContactList/ContactList.styled';
 
 export default class App extends Component {
   state = {
@@ -63,12 +64,12 @@ export default class App extends Component {
         </Section>
         <Section title="Contacts">
           <Filter filterQueue={this.handleFilter}></Filter>
-          <ul>
+          <List>
             <ContactList
               filteredContacts={this.showFilteredContacts()}
               onDeleteContact={this.deleteFromContacts}
             />
-          </ul>
+          </List>
         </Section>
       </>
     );

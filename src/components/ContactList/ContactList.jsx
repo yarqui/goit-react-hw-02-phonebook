@@ -1,11 +1,19 @@
-// import { nanoid } from 'nanoid';
+const ContactList = ({ contacts, filteredContacts }) => {
+  console.log('filteredContactsInContactList:', filteredContacts);
 
-const ContactList = () => {
-  return (
-    <ul>
-      <li></li>
-    </ul>
-  );
+  if (filteredContacts) {
+    return filteredContacts.map(({ id, name, number }) => (
+      <li key={id}>
+        {name}: {number}
+      </li>
+    ));
+  } else {
+    return contacts.map(({ id, name, number }) => (
+      <li key={id}>
+        {name}: {number}
+      </li>
+    ));
+  }
 };
 
 export default ContactList;

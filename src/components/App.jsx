@@ -36,9 +36,6 @@ export default class App extends Component {
     }));
   };
 
-  // handleFilter = queue => {
-  //   this.setState({ filter: queue });
-  // };
   handleFilter = queue => {
     queue ? this.setState({ filter: queue }) : this.setState({ filter: '' });
   };
@@ -59,9 +56,6 @@ export default class App extends Component {
   };
 
   render() {
-    // const { filter } = this.state;
-    // const { contacts } = this.state;
-
     return (
       <>
         <Section title="Phonebook">
@@ -71,10 +65,8 @@ export default class App extends Component {
           <Filter filterQueue={this.handleFilter}></Filter>
           <ul>
             <ContactList
-              // contacts={contacts}
               filteredContacts={this.showFilteredContacts()}
               onDeleteContact={this.deleteFromContacts}
-              // filter={filter}
             />
           </ul>
         </Section>

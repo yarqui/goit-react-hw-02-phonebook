@@ -1,25 +1,9 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
-// const INITIAL_STATE = {
-//   filter: '',
-// };
 
 const Filter = ({ filterQueue }) => {
-  //   state = INITIAL_STATE;
-
   const filterId = nanoid();
-
-  //   handleChange = e => {
-  //     const { name, value } = e.target;
-  //     const { filter } = this.state;
-
-  //     this.setState({ [name]: value });
-
-  //     this.props.filterQueue(filter);
-  //     // setTimeout(() => {
-  //     // }, 300);
-  //   };
 
   const handleChange = e => {
     const { value } = e.target;
@@ -36,7 +20,6 @@ const Filter = ({ filterQueue }) => {
         autoComplete="off"
         title="Find your contacts by name"
         id={filterId}
-        //   value={filter}
         onChange={handleChange}
       />
     </>

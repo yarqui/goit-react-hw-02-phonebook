@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
-// import * as yup from 'yup';
-
-// const validationSchema = yup.object().shape({
-//   name: yup.string().required('Please, enter contact name'),
-// });
-
 const INITIAL_STATE = {
   name: '',
   number: '',

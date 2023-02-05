@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 
-const INITIAL_STATE = {
-  filter: '',
-};
+// const INITIAL_STATE = {
+//   filter: '',
+// };
 
 export default class Filter extends Component {
-  state = INITIAL_STATE;
+  //   state = INITIAL_STATE;
 
   filterId = nanoid();
 
+  //   handleChange = e => {
+  //     const { name, value } = e.target;
+  //     const { filter } = this.state;
+
+  //     this.setState({ [name]: value });
+
+  //     this.props.filterQueue(filter);
+  //     // setTimeout(() => {
+  //     // }, 300);
+  //   };
+
   handleChange = e => {
-    const { name, value } = e.target;
-    const { filter } = this.state;
+    const { value } = e.target;
 
-    this.setState({ [name]: value });
-
-    this.props.filterQueue(filter);
+    this.props.filterQueue(value.trim().toLowerCase());
   };
 
   render() {
-    const { filter } = this.state;
+    // const { filter } = this.state;
     return (
       <>
         <label htmlFor={this.filterId}>Find your contacts by name</label>
@@ -30,7 +38,7 @@ export default class Filter extends Component {
           autoComplete="off"
           title="Find your contacts by name"
           id={this.filterId}
-          value={filter}
+          //   value={filter}
           onChange={this.handleChange}
         />
       </>

@@ -16,40 +16,68 @@ export default class App extends Component {
     filter: '',
   };
 
-  submitHandler = ({ id, name, number }) => {
-    id = nanoid();
+  // checkIfContactExists = queue => {
+  //   const { contacts } = this.state;
 
+  //   console.log(
+  //     'checkIfExists',
+  //     contacts.some(contact => contact.name === queue)
+  //   );
+
+  //   contacts.some(contact => contact.name === queue);
+  // };
+
+  handleSubmit = ({ id, name, number }) => {
+    const { contacts } = this.state;
+
+    // const alreadyExists = this.checkIfContactExists(name);
+    // console.log('alreadyExists:', alreadyExists);
+
+    if (contacts.some(contact => contact.name === name)) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+
+    id = nanoid();
     this.setState(({ contacts }) => ({
       contacts: [...contacts, { id, name, number }],
     }));
   };
 
+  // handleFilter = queue => {
+  //   this.setState({ filter: queue });
+  // };
   handleFilter = queue => {
-    this.setState({ filter: queue });
+    queue ? this.setState({ filter: queue }) : this.setState({ filter: '' });
   };
 
   showFilteredContacts = () => {
     const { contacts, filter } = this.state;
     const filteredContacts = contacts.filter(contact =>
-      contact.name.includes(filter)
+      contact.name.toLowerCase().includes(filter)
     );
+
     return filteredContacts;
   };
 
+  deleteFromContacts = () => {};
+
   render() {
-    const { contacts } = this.state;
+    const { filter } = this.state;
+    // const { contacts } = this.state;
 
     return (
       <>
         <Section title="Phonebook">
-          <ContactForm submitHandler={this.submitHandler} />
+          <ContactForm handleSubmit={this.handleSubmit} />
         </Section>
         <Section title="Contacts">
           <Filter filterQueue={this.handleFilter}></Filter>
           <ul>
             <ContactList
-              contacts={contacts}
+              // contacts={contacts}
               filteredContacts={this.showFilteredContacts()}
+              filter={filter}
             />
           </ul>
         </Section>

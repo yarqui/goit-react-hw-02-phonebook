@@ -15,6 +15,8 @@
 //     ));
 //   }
 // };
+import PropTypes from 'prop-types';
+
 const ContactList = ({ filteredContacts, onDeleteContact }) => {
   return filteredContacts.map(({ id, name, number }) => (
     <li key={id}>
@@ -30,6 +32,11 @@ const ContactList = ({ filteredContacts, onDeleteContact }) => {
       </button>
     </li>
   ));
+};
+
+ContactList.propTypes = {
+  filteredContacts: PropTypes.array.isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
 };
 
 export default ContactList;

@@ -53,8 +53,6 @@ export default class App extends Component {
   };
 
   deleteFromContacts = id => {
-    const { contacts } = this.state;
-
     this.setState(({ contacts }) => {
       return { contacts: contacts.filter(contact => contact.id !== id) };
     });

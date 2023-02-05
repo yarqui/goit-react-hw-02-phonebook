@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+
 // import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import * as yup from 'yup';
 
@@ -70,3 +72,7 @@ export default class ContactForm extends Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};

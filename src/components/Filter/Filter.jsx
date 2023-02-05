@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-
+import PropTypes from 'prop-types';
 // const INITIAL_STATE = {
 //   filter: '',
 // };
@@ -45,3 +45,7 @@ export default class Filter extends Component {
     );
   }
 }
+
+Filter.propTypes = {
+  filterQueue: PropTypes.func.isRequired,
+};

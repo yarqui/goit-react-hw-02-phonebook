@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 // const INITIAL_STATE = {
 //   filter: '',
 // };
 
-export default class Filter extends Component {
+const Filter = ({ filterQueue }) => {
   //   state = INITIAL_STATE;
 
-  filterId = nanoid();
+  const filterId = nanoid();
 
   //   handleChange = e => {
   //     const { name, value } = e.target;
@@ -21,31 +21,30 @@ export default class Filter extends Component {
   //     // }, 300);
   //   };
 
-  handleChange = e => {
+  const handleChange = e => {
     const { value } = e.target;
 
-    this.props.filterQueue(value.trim().toLowerCase());
+    filterQueue(value.trim().toLowerCase());
   };
 
-  render() {
-    // const { filter } = this.state;
-    return (
-      <>
-        <label htmlFor={this.filterId}>Find your contacts by name</label>
-        <input
-          type="text"
-          name="filter"
-          autoComplete="off"
-          title="Find your contacts by name"
-          id={this.filterId}
-          //   value={filter}
-          onChange={this.handleChange}
-        />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <label htmlFor={filterId}>Find your contacts by name</label>
+      <input
+        type="text"
+        name="filter"
+        autoComplete="off"
+        title="Find your contacts by name"
+        id={filterId}
+        //   value={filter}
+        onChange={handleChange}
+      />
+    </>
+  );
+};
 
 Filter.propTypes = {
   filterQueue: PropTypes.func.isRequired,
 };
+
+export default Filter;

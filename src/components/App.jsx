@@ -16,24 +16,16 @@ export default class App extends Component {
     filter: '',
   };
 
-  // checkIfContactExists = queue => {
-  //   const { contacts } = this.state;
-
-  //   console.log(
-  //     'checkIfExists',
-  //     contacts.some(contact => contact.name === queue)
-  //   );
-
-  //   contacts.some(contact => contact.name === queue);
-  // };
-
-  handleSubmit = ({ id, name, number }) => {
+  checkIfContactExists = queue => {
     const { contacts } = this.state;
 
-    // const alreadyExists = this.checkIfContactExists(name);
-    // console.log('alreadyExists:', alreadyExists);
+    return contacts.some(contact => contact.name === queue);
+  };
 
-    if (contacts.some(contact => contact.name === name)) {
+  handleSubmit = ({ id, name, number }) => {
+    const alreadyExists = this.checkIfContactExists(name);
+
+    if (alreadyExists) {
       alert(`${name} is already in contacts`);
       return;
     }
@@ -60,10 +52,16 @@ export default class App extends Component {
     return filteredContacts;
   };
 
-  deleteFromContacts = () => {};
+  deleteFromContacts = id => {
+    const { contacts } = this.state;
+
+    this.setState(({ contacts }) => {
+      return { contacts: contacts.filter(contact => contact.id !== id) };
+    });
+  };
 
   render() {
-    const { filter } = this.state;
+    // const { filter } = this.state;
     // const { contacts } = this.state;
 
     return (
@@ -77,7 +75,8 @@ export default class App extends Component {
             <ContactList
               // contacts={contacts}
               filteredContacts={this.showFilteredContacts()}
-              filter={filter}
+              onDeleteContact={this.deleteFromContacts}
+              // filter={filter}
             />
           </ul>
         </Section>
@@ -85,5 +84,3 @@ export default class App extends Component {
     );
   }
 }
-
-// export default App;

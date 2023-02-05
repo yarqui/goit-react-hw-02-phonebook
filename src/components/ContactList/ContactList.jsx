@@ -15,11 +15,17 @@
 //     ));
 //   }
 // };
-const ContactList = ({ filteredContacts }) => {
+const ContactList = ({ filteredContacts, onDeleteContact }) => {
   return filteredContacts.map(({ id, name, number }) => (
     <li key={id}>
       {name}: {number}
-      <button id={id} type="button">
+      <button
+        id={id}
+        type="button"
+        onClick={() => {
+          onDeleteContact(id);
+        }}
+      >
         Delete
       </button>
     </li>

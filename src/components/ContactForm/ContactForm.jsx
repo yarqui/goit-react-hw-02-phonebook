@@ -1,53 +1,72 @@
-// import { nanoid } from 'nanoid';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as yup from 'yup';
+import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
+// import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import * as yup from 'yup';
 
-const validationSchema = yup.object().shape({
-  name: yup.string().required('Please, enter contact name'),
-});
+// const validationSchema = yup.object().shape({
+//   name: yup.string().required('Please, enter contact name'),
+// });
 
-const initialValues = {
+const INITIAL_STATE = {
   name: '',
+  number: '',
 };
 
-const ContactForm = ({ nameState, contacts }) => {
-  //   const contactId = nanoid();
+export default class ContactForm extends Component {
+  state = INITIAL_STATE;
 
-  const handleSubmit = (values, { resetForm }) => {
-    console.log('values:', values);
+  nameInputId = nanoid();
+  numberInputId = nanoid();
 
-    resetForm();
+  resetForm = () => {
+    this.setState(INITIAL_STATE);
   };
 
-  return (
-    <>
-      <h2>Phonebook</h2>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        <Form autoComplete="off">
-          <label htmlFor="name">Name</label>
-          <Field
-            type="text"
-            name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            id="name"
-            placeholder="Contact name"
-            required
-          />
-          <button type="submit">Add contact</button>
-          <ErrorMessage name="name" component="div" />
-        </Form>
-      </Formik>
-      <h2>Contacts</h2>
-      <ul>
-        <li></li>
-      </ul>
-    </>
-  );
-};
+  handleChange = e => {
+    const { name, value } = e.currentTarget;
 
-export default ContactForm;
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    this.props.submitHandler(this.state);
+
+    this.resetForm();
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label htmlFor={this.nameInputId}>Name</label>
+        <input
+          type="text"
+          name="name"
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          id={this.nameInputId}
+          placeholder="Contact name"
+          required
+          autoComplete="off"
+          onChange={this.handleChange}
+          value={this.state.name}
+        />
+
+        <label htmlFor={this.numberInputId}>Number</label>
+        <input
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          id={this.numberInputId}
+          required
+          autoComplete="off"
+          onChange={this.handleChange}
+          value={this.state.number}
+        />
+        <button type="submit">Add contact</button>
+      </form>
+    );
+  }
+}
